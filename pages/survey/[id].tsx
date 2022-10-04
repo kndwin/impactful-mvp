@@ -22,7 +22,7 @@ export default function SurveyPage() {
   );
 }
 
-const StyledContainer = tw.div`w-full h-full min-h-screen bg-stone-100`;
-const StyledHeader = tw.header`container mx-auto py-4 flex justify-between`;
-const StyledMain = tw.main`container mx-auto`;
-const StyledFooter = tw.footer`container mx-auto`;
+const StyledContainer = tw.div<any>`w-full h-full min-h-screen bg-stone-100`;
+const StyledHeader = tw.header<any>`container mx-auto py-4 flex justify-between`;
+const StyledMain = tw.main<any>`container mx-auto`;
+const StyledFooter = tw.footer<any>`container mx-auto`;

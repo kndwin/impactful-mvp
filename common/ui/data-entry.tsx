@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import tw from "tailwind-styled-components";
 
-export const Button = tw.button<ButtonHTMLAttributes<HTMLButtonElement>>`
+export const Button = tw.button<any>`
 	py-2.5 px-5 text-sm font-bold text-left
 	flex gap-4 items-center justify-between
 	text-gray-900 focus:outline-none bg-white rounded-lg 

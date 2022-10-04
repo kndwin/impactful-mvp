@@ -6,7 +6,7 @@ import { Button, Spinner } from "common/ui";
 import { getBaseUrl } from "common/utils";
 import { useSession } from "next-auth/react";
 import { useCreateOneSurveyMutation } from "features/survey/hook";
-import { faker } from "@faker-js/faker";
+import {nanoid} from "nanoid";
 
 export function ButtonModalCreateSurvey() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ export function ButtonModalCreateSurvey() {
     console.log({ mutation });
     await mutation.mutate({
       email: data?.user?.email ?? "",
-      name: `Test Survey Name ${selectedSurveyType} ${faker.music.genre()}`,
+      name: `Test Survey Name ${selectedSurveyType} ${nanoid(6)}`,
       type: selectedSurveyType,
       structure: [
         { value: "name", label: "Name", type: "text" },

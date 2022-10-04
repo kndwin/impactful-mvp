@@ -103,24 +103,24 @@ const Nav = () => {
   );
 };
 
-const StyledImg = tw.img`h-12 w-12 rounded-xl ring-2 ring-zinc-200
+const StyledImg = tw.img<any>`h-12 w-12 rounded-xl ring-2 ring-zinc-200
 	bg-white
 `;
-const StyledContainer = tw.div`w-full h-full min-h-screen bg-zinc-100
+const StyledContainer = tw.div<any>`w-full h-full min-h-screen bg-zinc-100
 	flex
 `;
-const StyledHeader = tw.header`py-4 flex justify-between  items-center
+const StyledHeader = tw.header<any>`py-4 flex justify-between  items-center
 	border-b-2 border-b-zinc-200 px-5 h-full max-h-[4em] min-h-[4em]
 `;
-const StyledMain = tw.main`flex flex-1 flex-col p-4 overflow-auto
+const StyledMain = tw.main<any>`flex flex-1 flex-col p-4 overflow-auto
 	
 `;
-const StyledNav = tw.nav`w-full h-full min-w-[15em] max-w-[15em]
+const StyledNav = tw.nav<any>`w-full h-full min-w-[15em] max-w-[15em]
 	border-r-2 border-r-gray-200 min-h-screen
 	flex flex-col pt-4 
 `;
 
-const StyledContent = tw.div`flex flex-col flex-1`;
+const StyledContent = tw.div<any>`flex flex-col flex-1`;
 
 export const Layout = Object.assign(LayoutRoot, {
   Header: StyledHeader,

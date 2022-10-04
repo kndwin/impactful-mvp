@@ -25,7 +25,7 @@ export const FormTypeOne = () => {
     resolver: zodResolver(formOneSchema),
   });
 
-  const onSubmit = async (data) => {
+	const onSubmit = async (data: any) => {
     console.log({ data });
     await mutation.mutateAsync({
       surveyId,

@@ -32,7 +32,7 @@ export default function DashboardSurveyPage() {
           </div>
           <div className="flex px-4 py-2 bg-white border rounded-lg border-zinc-200">
             {Boolean(selected) ? (
-              <a href={surveyLink} target="_blank">
+              <a href={surveyLink} target="_blank" rel="noreferrer">
                 {surveyLink}
               </a>
             ) : (
