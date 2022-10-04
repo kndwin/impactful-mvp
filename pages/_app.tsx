@@ -1,8 +1,18 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "tailwindcss/tailwind.css";
+import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
+import { trpc } from "common/api/hooks";
+import { Session } from "next-auth";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function App({
+  Component,
+  pageProps,
+}: AppProps & { pageProps: { session: Session } }) {
+  return (
+    <SessionProvider session={pageProps.session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }
 
-export default MyApp
+export default trpc.withTRPC(App);
