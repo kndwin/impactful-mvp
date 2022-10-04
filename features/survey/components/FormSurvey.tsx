@@ -1,5 +1,4 @@
 import tw from "tailwind-styled-components";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,8 +13,8 @@ const formOneSchema = z.object({
 
 export const FormTypeOne = () => {
   const router = useRouter();
-	// TODO(knd): not explicit that id is surveyId
-	const surveyId = router.query?.id as string
+  // TODO(knd): not explicit that id is surveyId
+  const surveyId = router.query?.id as string;
   const { mutation } = useCreateOneSurveyAnswerMutation();
   const {
     register,
@@ -25,21 +24,16 @@ export const FormTypeOne = () => {
     resolver: zodResolver(formOneSchema),
   });
 
-	const onSubmit = async (data: any) => {
-    console.log({ data });
+  const onSubmit = async (data: any) => {
     await mutation.mutateAsync({
       surveyId,
       payload: data,
     });
   };
 
-	useEffect(() => {
-		console.log({ errors })
-	}, [errors])
-
   return (
     <>
-      {mutation.isIdle && (
+      {(mutation.isIdle || mutation.isLoading) && (
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <StyledTextField
             placeholder="Name"

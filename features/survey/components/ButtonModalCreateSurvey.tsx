@@ -6,7 +6,7 @@ import { Button, Spinner } from "common/ui";
 import { getBaseUrl } from "common/utils";
 import { useSession } from "next-auth/react";
 import { useCreateOneSurveyMutation } from "features/survey/hook";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
 export function ButtonModalCreateSurvey() {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +75,7 @@ export function ButtonModalCreateSurvey() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle bg-white shadow-xl transform rounded-2xl transition-all">
-                  {mutation.isIdle && (
+                  {(mutation.isIdle || mutation.isLoading) && (
                     <>
                       <Dialog.Title
                         as="h3"
