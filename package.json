@@ -27,6 +27,8 @@
     "@trpc/server": "^10.0.0-proxy-beta.13",
     "classname-variants": "^1.2.1",
     "clsx": "^1.2.1",
+    "flowbite": "^1.5.3",
+    "flowbite-react": "^0.1.11",
     "nano": "^10.0.0",
     "nanoid": "^4.0.0",
     "next": "12.3.1",
@@ -37,6 +39,7 @@
     "react-icons": "^4.4.0",
     "react-table": "^7.8.0",
     "tailwind-styled-components": "^2.2.0",
+    "ts-pattern": "^4.0.5",
     "zod": "^3.19.1",
     "zustand": "^4.1.1"
   },

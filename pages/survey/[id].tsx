@@ -1,11 +1,26 @@
 import tw from "tailwind-styled-components";
 import { useRouter } from "next/router";
-import { FormTypeOne } from "features/survey";
+import { FormSurvey } from "features/survey";
 import { useOneSurveyQuery } from "features/survey/hook";
+import { Survey } from "@prisma/client";
 
 export default function SurveyPage() {
   const router = useRouter();
   const { query } = useOneSurveyQuery({ id: router.query?.id as string });
+
+  if (Boolean(query.isLoading)) {
+    return <div>Loading</div>;
+  }
+
+  if (Boolean(query.isError)) {
+    console.log({ error: query.error });
+    return <div>Something went wrong</div>;
+  }
+
+  if (!Boolean(query.data)) {
+    return <div>No data</div>;
+  }
+
   return (
     <StyledContainer>
       <StyledHeader>
@@ -13,11 +28,10 @@ export default function SurveyPage() {
       </StyledHeader>
 
       <StyledMain>
-        {query.data?.type === "1" && <FormTypeOne />}
+        <FormSurvey survey={query.data as Survey} />
       </StyledMain>
 
-      <StyledFooter>
-			</StyledFooter>
+      <StyledFooter></StyledFooter>
     </StyledContainer>
   );
 }

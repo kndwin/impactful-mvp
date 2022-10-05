@@ -1,16 +1,17 @@
-import { Fragment, useState, useEffect } from "react";
 import clsx from "clsx";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import { useSession } from "next-auth/react";
+
 import { Button, Spinner } from "common/ui";
 import { getBaseUrl } from "common/utils";
-import { useSession } from "next-auth/react";
 import { useCreateOneSurveyMutation } from "features/survey/hook";
-import { nanoid } from "nanoid";
+import { formSurveys } from "features/survey/schemas";
 
 export function ButtonModalCreateSurvey() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedSurveyType, setSelectedSurveyType] = useState("1");
+  const [selectedSurvey, setSelectedSurvey] = useState(formSurveys[0]);
   const { data } = useSession();
 
   const { mutation } = useCreateOneSurveyMutation();
@@ -19,12 +20,9 @@ export function ButtonModalCreateSurvey() {
     console.log({ mutation });
     await mutation.mutate({
       email: data?.user?.email ?? "",
-      name: `Test Survey Name ${selectedSurveyType} ${nanoid(6)}`,
-      type: selectedSurveyType,
-      structure: [
-        { value: "name", label: "Name", type: "text" },
-        { value: "description", label: "Description", type: "text" },
-      ], // TODO(knd): Think about how to de-couple structure (not trivial)
+      name: `${selectedSurvey.name} - ${new Date().toLocaleDateString()}`,
+      type: selectedSurvey.type,
+      structure: selectedSurvey.structure
     });
   };
 
@@ -39,7 +37,7 @@ export function ButtonModalCreateSurvey() {
   useEffect(() => {
     if (!isOpen && (mutation.isSuccess || mutation.isError)) {
       mutation.reset();
-      setSelectedSurveyType("1");
+      setSelectedSurvey(formSurveys[0]);
     }
   }, [isOpen]);
 
@@ -83,17 +81,18 @@ export function ButtonModalCreateSurvey() {
                       >
                         Create a new Survey
                       </Dialog.Title>
-                      <div className="mt-4 mb-8 grid grid-cols-3 gap-2">
-                        {["1", "2", "3"].map((survey) => (
+                      <div className="mt-4 mb-8 grid grid-cols-2 gap-2">
+                        {formSurveys.map((survey) => (
                           <Button
                             className={clsx(
-                              selectedSurveyType === survey && "bg-zinc-200"
+                              selectedSurvey.type === survey.type &&
+                                "bg-zinc-200"
                             )}
                             key={survey}
-                            onClick={() => setSelectedSurveyType(survey)}
+                            onClick={() => setSelectedSurvey(survey)}
                           >
-                            {`Type ${survey}`}
-                            {selectedSurveyType === survey && (
+                            {survey.name}
+                            {selectedSurvey.type === survey.type && (
                               <CheckIcon className="w-4 h-4" />
                             )}
                           </Button>
